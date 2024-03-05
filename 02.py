@@ -9,13 +9,15 @@ def add_contact(args, contacts):
     return "Contact added."
 
 def change_contacts(args, contacts):
-    new_phone = args
-    contacts["name"] = new_phone
+    name, new_phone = args
+    for key in contacts.keys():
+        if key == name:
+            contacts[key] = new_phone
     return "Contact updated."
 
-def show_phone(contacts):
-    for keys in contacts.items():
-        return contacts.get(keys, default=None)
+def show_phone(args, contacts):
+    name = args[0]
+    return contacts.get(name)
 
 def show_all(contacts):
     return contacts.items()
@@ -38,7 +40,7 @@ def main():
         elif command == "change":
             print(change_contacts(args, contacts))
         elif command == "phone":
-            print(show_phone(contacts))
+            print(show_phone(args, contacts))
         elif command == "all":
             print(show_all(contacts))
         else:
